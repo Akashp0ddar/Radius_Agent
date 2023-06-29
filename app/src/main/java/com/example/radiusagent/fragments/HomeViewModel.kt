@@ -1,4 +1,4 @@
-package com.example.radiusagent
+package com.example.radiusagent.fragments
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

@@ -2,6 +2,7 @@ package com.example.radiusagent
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.radiusagent.fragments.HomeViewModel
 import com.example.radiusagent.repository.Repository
 
 class ViewModelFactory(private val repository: Repository) : ViewModelProvider.Factory {
