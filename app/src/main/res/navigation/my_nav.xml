@@ -9,7 +9,7 @@
         android:id="@+id/homeFragment"
         android:name="com.example.radiusagent.fragments.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_facilitySelection"
             app:destination="@id/facilitySelection" />
@@ -25,11 +25,20 @@
     </fragment>
     <fragment
         android:id="@+id/optionsSelectionFragment"
-        android:name="com.example.radiusagent.OptionsSelectionFragment"
+        android:name="com.example.radiusagent.fragments.OptionsSelectionFragment"
         android:label="fragment_options_selection"
         tools:layout="@layout/fragment_options_selection" >
         <action
-            android:id="@+id/action_optionsSelectionFragment_to_homeFragment"
+            android:id="@+id/action_optionsSelectionFragment_to_exclusionFragment"
+            app:destination="@id/exclusionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exclusionFragment"
+        android:name="com.example.radiusagent.ExclusionFragment"
+        android:label="fragment_exclusion"
+        tools:layout="@layout/fragment_exclusion">
+        <action
+            android:id="@+id/action_exclusionFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

@@ -1,53 +1,58 @@
-package com.example.radiusagent.fragments
+package com.example.radiusagent
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.example.radiusagent.R
-import com.example.radiusagent.ViewModelFactory
-import com.example.radiusagent.databinding.FragmentHomeBinding
+import com.example.radiusagent.databinding.FragmentExclusionBinding
+import com.example.radiusagent.fragments.HomeViewModel
+import com.example.radiusagent.fragments.adapters.ExclusionAdapter
 import com.example.radiusagent.repository.Repository
 import com.example.radiusagent.utils.Constants
 
 
-class HomeFragment : Fragment(R.layout.fragment_home) {
-
-    private lateinit var binding: FragmentHomeBinding
+class ExclusionFragment : Fragment(R.layout.fragment_exclusion) {
+    private lateinit var binding:FragmentExclusionBinding
     private val viewModel by activityViewModels<HomeViewModel> { ViewModelFactory(Repository()) }
+    private lateinit var exclusionAdapter: ExclusionAdapter
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentHomeBinding.bind(view)
-        setUpViews()
+        binding = FragmentExclusionBinding.bind(view)
+        adapterSetUp()
+        setUpPreview()
         onClick()
     }
 
-    private fun setUpViews() {
-        binding.tvFacilityIdResult.text = viewModel.facility.facility_id
-        binding.tvFacilityNameResult.text = viewModel.facility.name
+    private fun setUpPreview() {
+        binding.tvDialogFacilityIdResult.text = viewModel.facility.facility_id
+        binding.tvDialogFacilityNameResult.text = viewModel.facility.name
         binding.tvOptionsIdResult.text = viewModel.option.id
         binding.tvOptionsNameResult.text = viewModel.option.name
-        if (viewModel.option.icon.isNotEmpty()) {
-            binding.ivIcon.isVisible = true
-            iconSetup(viewModel.option.icon)
-        }
+        iconSetup(viewModel.option.icon)
+
     }
 
     private fun onClick() {
-        binding.btnSelectFacility.setOnClickListener {
-        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFacilitySelection())
+        binding.btnSubmit.setOnClickListener {
+            findNavController().navigate(ExclusionFragmentDirections.actionExclusionFragmentToHomeFragment())
         }
+    }
+
+    private fun adapterSetUp() {
+        exclusionAdapter = ExclusionAdapter(exclusionList = viewModel.exclusionList)
+        binding.rvExclusion.adapter = exclusionAdapter
+
     }
 
 
     private fun iconSetup(icon: String) {
         when (icon) {
             Constants.APARTMENT -> {
-                binding.ivIcon.setImageDrawable(
+                binding.ivIconExclusion.setImageDrawable(
                     AppCompatResources.getDrawable(
                         requireContext(),
                         R.drawable.apartment
@@ -56,7 +61,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
 
             Constants.CONDO -> {
-                binding.ivIcon.setImageDrawable(
+                binding.ivIconExclusion.setImageDrawable(
                     AppCompatResources.getDrawable(
                         requireContext(),
                         R.drawable.condo
@@ -65,7 +70,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
 
             Constants.BOAT -> {
-                binding.ivIcon.setImageDrawable(
+                binding.ivIconExclusion.setImageDrawable(
                     AppCompatResources.getDrawable(
                         requireContext(),
                         R.drawable.boat
@@ -75,7 +80,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
 
             Constants.LAND -> {
-                binding.ivIcon.setImageDrawable(
+                binding.ivIconExclusion.setImageDrawable(
                     AppCompatResources.getDrawable(
                         requireContext(),
                         R.drawable.land
@@ -84,7 +89,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
 
             Constants.ROOMS -> {
-                binding.ivIcon.setImageDrawable(
+                binding.ivIconExclusion.setImageDrawable(
                     AppCompatResources.getDrawable(
                         requireContext(),
                         R.drawable.rooms
@@ -93,7 +98,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
 
             Constants.NO_ROOM -> {
-                binding.ivIcon.setImageDrawable(
+                binding.ivIconExclusion.setImageDrawable(
                     AppCompatResources.getDrawable(
                         requireContext(),
                         R.drawable.no_room
@@ -102,7 +107,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
 
             Constants.SWIMMING -> {
-                binding.ivIcon.setImageDrawable(
+                binding.ivIconExclusion.setImageDrawable(
                     AppCompatResources.getDrawable(
                         requireContext(),
                         R.drawable.swimming
@@ -111,7 +116,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
 
             Constants.GARDEN -> {
-                binding.ivIcon.setImageDrawable(
+                binding.ivIconExclusion.setImageDrawable(
                     AppCompatResources.getDrawable(
                         requireContext(),
                         R.drawable.garden
@@ -121,16 +126,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
 
             Constants.GARAGE -> {
-                binding.ivIcon.setImageDrawable(
+                binding.ivIconExclusion.setImageDrawable(
                     AppCompatResources.getDrawable(
                         requireContext(),
                         R.drawable.garage
                     )
                 )
             }
-
         }
     }
-
 
 }

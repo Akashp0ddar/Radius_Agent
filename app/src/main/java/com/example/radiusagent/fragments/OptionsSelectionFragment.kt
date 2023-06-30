@@ -1,4 +1,4 @@
-package com.example.radiusagent
+package com.example.radiusagent.fragments
 
 import android.os.Bundle
 import android.view.View
@@ -6,9 +6,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.radiusagent.R
+import com.example.radiusagent.ViewModelFactory
 import com.example.radiusagent.databinding.FragmentOptionsSelectionBinding
-import com.example.radiusagent.fragments.HomeViewModel
 import com.example.radiusagent.fragments.adapters.OptionsAdapter
+import com.example.radiusagent.models.Option
 import com.example.radiusagent.repository.Repository
 
 class OptionsSelectionFragment : Fragment(R.layout.fragment_options_selection) {
@@ -19,9 +21,14 @@ class OptionsSelectionFragment : Fragment(R.layout.fragment_options_selection) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentOptionsSelectionBinding.bind(view)
+        initSetup()
         textSetup()
         adapterSetup()
         onClick()
+    }
+
+    private fun initSetup() {
+        viewModel.option = Option(icon = "", id = "", name = "")
     }
 
 
@@ -50,8 +57,7 @@ class OptionsSelectionFragment : Fragment(R.layout.fragment_options_selection) {
                 Toast.makeText(requireContext(), "Please select one option", Toast.LENGTH_SHORT)
                     .show()
             } else {
-
-                findNavController().navigate(OptionsSelectionFragmentDirections.actionOptionsSelectionFragmentToHomeFragment())
+                findNavController().navigate(OptionsSelectionFragmentDirections.actionOptionsSelectionFragmentToExclusionFragment())
             }
         }
     }

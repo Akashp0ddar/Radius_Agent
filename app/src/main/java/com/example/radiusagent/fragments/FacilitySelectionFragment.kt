@@ -11,6 +11,7 @@ import com.example.radiusagent.R
 import com.example.radiusagent.ViewModelFactory
 import com.example.radiusagent.databinding.FacilitySelectionBinding
 import com.example.radiusagent.fragments.adapters.FacilitiesAdapter
+import com.example.radiusagent.models.Facility
 import com.example.radiusagent.repository.Repository
 
 class FacilitySelectionFragment : Fragment(R.layout.facility_selection) {
@@ -22,8 +23,13 @@ class FacilitySelectionFragment : Fragment(R.layout.facility_selection) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FacilitySelectionBinding.bind(view)
+        initViews()
         onClick()
         apiSetup()
+    }
+
+    private fun initViews() {
+        viewModel.facility = Facility(facility_id = "", name = "", options = listOf())
     }
 
 

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ExclusionFragment">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clExclusion"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_cl_home_screen"
+            app:layout_constraintBottom_toTopOf="@id/btnSubmit"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPreviewText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/preview"
+                android:textSize="25sp"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@id/tvDialogFacilityId"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDialogFacilityId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/facility_id"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvPreviewText"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDialogFacilityIdResult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tvDialogFacilityId"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvDialogFacilityId"
+                tools:text="1" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDialogFacilityName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/name"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@id/tvDialogFacilityId"
+                app:layout_constraintTop_toBottomOf="@id/tvDialogFacilityId" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDialogFacilityNameResult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tvDialogFacilityName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvDialogFacilityName"
+                tools:text="Apartment" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvExclusionOptionsIdPreview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/options_id"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@id/tvDialogFacilityName"
+                app:layout_constraintTop_toBottomOf="@id/tvDialogFacilityName" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvExclusionOptionsNamePreview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="@id/tvExclusionOptionsIdPreview"
+                app:layout_constraintTop_toBottomOf="@id/tvExclusionOptionsIdPreview" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvExclusionOptionsIconPreview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/icon"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="@id/tvExclusionOptionsNamePreview"
+                app:layout_constraintTop_toBottomOf="@id/tvExclusionOptionsNamePreview" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvOptionsIdResult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tvExclusionOptionsNamePreview"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvExclusionOptionsNamePreview"
+                tools:text="boat" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivIconExclusion"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:layout_constraintBottom_toBottomOf="@id/tvExclusionOptionsIconPreview"
+                app:layout_constraintEnd_toEndOf="@id/tvOptionsIdResult"
+                app:layout_constraintTop_toTopOf="@id/tvExclusionOptionsIconPreview"
+                tools:srcCompat="@drawable/apartment" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvOptionsNameResult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tvExclusionOptionsIdPreview"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvExclusionOptionsIdPreview"
+                tools:text="2" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvExclusionsText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:text="@string/exclusion_desc"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="@id/tvDialogFacilityName"
+                app:layout_constraintEnd_toEndOf="@id/tvDialogFacilityNameResult"
+                app:layout_constraintTop_toBottomOf="@id/tvExclusionOptionsIconPreview" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvExclusion"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/exclusion_list_single_item"
+                app:layout_constraintBottom_toBottomOf="@id/clExclusion"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvExclusionsText" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSubmit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_cl_home_screen"
+            android:text="@string/submit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/clExclusion"
+            app:layout_constraintStart_toStartOf="@id/clExclusion" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
