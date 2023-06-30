@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/exclusionFragment"
-        android:name="com.example.radiusagent.ExclusionFragment"
+        android:name="com.example.radiusagent.fragments.ExclusionFragment"
         android:label="fragment_exclusion"
         tools:layout="@layout/fragment_exclusion">
         <action

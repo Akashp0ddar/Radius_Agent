@@ -2,6 +2,7 @@ package com.example.radiusagent.fragments
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -27,19 +28,32 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun setUpViews() {
-        binding.tvFacilityIdResult.text = viewModel.facility.facility_id
-        binding.tvFacilityNameResult.text = viewModel.facility.name
-        binding.tvOptionsIdResult.text = viewModel.option.id
-        binding.tvOptionsNameResult.text = viewModel.option.name
-        if (viewModel.option.icon.isNotEmpty()) {
-            binding.ivIcon.isVisible = true
-            iconSetup(viewModel.option.icon)
+        if (viewModel.checkExclusion(
+                facilityId = viewModel.facility.facility_id,
+                optionId = viewModel.option.id,
+                exclusions = viewModel.exclusionList
+            )
+        ) {
+            Toast.makeText(
+                requireContext(),
+                "this is a invalid selection you need to select again",
+                Toast.LENGTH_SHORT
+            ).show()
+        }else{
+            binding.tvFacilityIdResult.text = viewModel.facility.facility_id
+            binding.tvFacilityNameResult.text = viewModel.facility.name
+            binding.tvOptionsIdResult.text = viewModel.option.id
+            binding.tvOptionsNameResult.text = viewModel.option.name
+            if (viewModel.option.icon.isNotEmpty()) {
+                binding.ivIcon.isVisible = true
+                iconSetup(viewModel.option.icon)
+            }
         }
     }
 
     private fun onClick() {
         binding.btnSelectFacility.setOnClickListener {
-        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFacilitySelection())
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFacilitySelection())
         }
     }
 
@@ -128,7 +142,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     )
                 )
             }
-
         }
     }
 

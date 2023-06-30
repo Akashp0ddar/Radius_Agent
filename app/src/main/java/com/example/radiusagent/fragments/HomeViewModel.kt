@@ -25,4 +25,21 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
     var facility: Facility = Facility(facility_id = "", name = "", options = listOf())
     var option: Option = Option(icon = "", id = "", name = "")
 
+
+    fun checkExclusion(facilityId: String, optionId: String, exclusions: List<List<Exclusion>>): Boolean {
+        for (exclusionList in exclusions) {
+            val matchingExclusion = exclusionList.find { exclusion ->
+                exclusion.facility_id == facilityId && exclusion.options_id == optionId
+            }
+            if (matchingExclusion != null) {
+                return true // Exclusion found, invalid selection
+            }
+        }
+        return false // No matching exclusion found, valid selection
+    }
+
+
+
+
+
 }

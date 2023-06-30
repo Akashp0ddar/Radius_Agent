@@ -1,20 +1,21 @@
-package com.example.radiusagent
+package com.example.radiusagent.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.radiusagent.R
+import com.example.radiusagent.ViewModelFactory
 import com.example.radiusagent.databinding.FragmentExclusionBinding
-import com.example.radiusagent.fragments.HomeViewModel
 import com.example.radiusagent.fragments.adapters.ExclusionAdapter
 import com.example.radiusagent.repository.Repository
 import com.example.radiusagent.utils.Constants
 
 
 class ExclusionFragment : Fragment(R.layout.fragment_exclusion) {
-    private lateinit var binding:FragmentExclusionBinding
+    private lateinit var binding: FragmentExclusionBinding
     private val viewModel by activityViewModels<HomeViewModel> { ViewModelFactory(Repository()) }
     private lateinit var exclusionAdapter: ExclusionAdapter
 
