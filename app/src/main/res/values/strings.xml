@@ -10,4 +10,7 @@
     <string name="select_facility">Select Facility</string>
     <string name="submit">Submit</string>
     <string name="icon">Icon</string>
+    <string name="submit_options">Submit Options</string>
+    <string name="select_options">Select options</string>
+    <string name="submit_facilities">Submit Facility</string>
 </resources>

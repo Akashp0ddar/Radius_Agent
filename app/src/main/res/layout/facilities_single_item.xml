@@ -8,8 +8,10 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clFacilitiesSingleItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@drawable/bg_cl_home_screen"
         android:paddingBottom="10dp">
 
@@ -54,17 +56,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tvDialogFacilityName"
             tools:text="Apartment" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvOptions"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:visibility="gone"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/option_selection_single_item"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvDialogFacilityName" />-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -66,7 +66,7 @@
             app:layout_constraintTop_toBottomOf="@id/tvDialogOptionsName" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivIconDialog"
+            android:id="@+id/ivIcon"
             android:layout_width="20dp"
             android:layout_height="20dp"
             app:layout_constraintBottom_toBottomOf="@id/tvDialogIconName"
@@ -81,9 +81,9 @@
             android:layout_height="3dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/bg_cl_home_screen"
-            app:layout_constraintTop_toBottomOf="@id/ivIconDialog"
+            app:layout_constraintTop_toBottomOf="@id/ivIcon"
             app:layout_constraintStart_toStartOf="@id/tvDialogIconName"
-            app:layout_constraintEnd_toEndOf="@id/ivIconDialog" />
+            app:layout_constraintEnd_toEndOf="@id/ivIcon" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

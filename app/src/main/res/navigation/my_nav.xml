@@ -9,5 +9,23 @@
         android:id="@+id/homeFragment"
         android:name="com.example.radiusagent.fragments.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_facilitySelection"
+            app:destination="@id/facilitySelection" />
+    </fragment>
+    <fragment
+        android:id="@+id/facilitySelection"
+        android:name="com.example.radiusagent.fragments.FacilitySelectionFragment"
+        android:label="FacilitySelection"
+        tools:layout="@layout/facility_selection">
+        <action
+            android:id="@+id/action_facilitySelection_to_optionsSelectionFragment"
+            app:destination="@id/optionsSelectionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/optionsSelectionFragment"
+        android:name="com.example.radiusagent.OptionsSelectionFragment"
+        android:label="fragment_options_selection"
+        tools:layout="@layout/fragment_options_selection" />
 </navigation>
