@@ -7,13 +7,17 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.example.radiusagent.R
 import com.example.radiusagent.databinding.OptionSelectionSingleItemBinding
+import com.example.radiusagent.models.Facility
 import com.example.radiusagent.models.Option
 import com.example.radiusagent.utils.Constants
 
 class OptionsAdapter(
     private val optionsList: List<Option>,
-    private val context: Context
+    private val context: Context,
+    private val onItemClick: (option: Option) -> Unit
 ) : RecyclerView.Adapter<OptionsAdapter.ViewHolder>() {
+    private var selectionItemPosition = RecyclerView.NO_POSITION
+
     inner class ViewHolder(val binding: OptionSelectionSingleItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -31,6 +35,19 @@ class OptionsAdapter(
         holder.binding.tvDialogOptionsIdResult.text = optionsList[position].id
         holder.binding.tvDialogFacilityNameResult.text = optionsList[position].name
         iconSetup(icon = optionsList[position].icon, optionsViewHolder = holder)
+        if (position==selectionItemPosition){
+            holder.binding.clOptionSelections.background = AppCompatResources.getDrawable(context,R.drawable.item_select_bg)
+        }else{
+            holder.binding.clOptionSelections.background = AppCompatResources.getDrawable(context,R.drawable.bg_cl_home_screen)
+
+        }
+        holder.itemView.setOnClickListener {
+            val previousSelectedItem = selectionItemPosition
+            selectionItemPosition = holder.adapterPosition
+            notifyItemChanged(previousSelectedItem)
+            notifyItemChanged(selectionItemPosition)
+            onItemClick(optionsList[position])
+        }
     }
 
 

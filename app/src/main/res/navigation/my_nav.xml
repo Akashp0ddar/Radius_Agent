@@ -27,5 +27,9 @@
         android:id="@+id/optionsSelectionFragment"
         android:name="com.example.radiusagent.OptionsSelectionFragment"
         android:label="fragment_options_selection"
-        tools:layout="@layout/fragment_options_selection" />
+        tools:layout="@layout/fragment_options_selection" >
+        <action
+            android:id="@+id/action_optionsSelectionFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>
