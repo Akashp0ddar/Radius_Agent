@@ -23,6 +23,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
+        viewModel.realmInit(context = requireContext())
         setUpViews()
         onClick()
     }
@@ -53,7 +54,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun onClick() {
         binding.btnSelectFacility.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFacilitySelection())
+            viewModel.addData("Checking")
+//            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFacilitySelection())
         }
     }
 
