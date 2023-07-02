@@ -22,12 +22,14 @@ class OptionsSelectionFragment : Fragment(R.layout.fragment_options_selection) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentOptionsSelectionBinding.bind(view)
         initSetup()
-        textSetup()
         adapterSetup()
         onClick()
     }
 
     private fun initSetup() {
+        binding.tvFacilityIdResult.text = viewModel.facility.facility_id
+        binding.tvFacilityNameResult.text = viewModel.facility.name
+
         viewModel.option = OptionRealm().apply {
             icon = ""
             id = ""
@@ -35,11 +37,6 @@ class OptionsSelectionFragment : Fragment(R.layout.fragment_options_selection) {
         }
     }
 
-
-    private fun textSetup() {
-        binding.tvFacilityIdResult.text = viewModel.facility.facility_id
-        binding.tvFacilityNameResult.text = viewModel.facility.name
-    }
 
 
     private fun adapterSetup() {

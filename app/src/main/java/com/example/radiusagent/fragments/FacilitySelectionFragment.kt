@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -12,6 +13,7 @@ import com.example.radiusagent.ViewModelFactory
 import com.example.radiusagent.databinding.FacilitySelectionBinding
 import com.example.radiusagent.fragments.adapters.FacilitiesAdapter
 import com.example.radiusagent.models.realmobjects.FacilityRealm
+import com.example.radiusagent.models.realmobjects.OptionRealm
 import com.example.radiusagent.repository.Repository
 
 class FacilitySelectionFragment : Fragment(R.layout.facility_selection) {
@@ -25,14 +27,32 @@ class FacilitySelectionFragment : Fragment(R.layout.facility_selection) {
         binding = FacilitySelectionBinding.bind(view)
         initViews()
         onClick()
-        apiSetup()
+        dataSetup()
+    }
+
+    private fun dataSetup() {
+        viewModel.activeNetworkStatus.observe(requireActivity()) { connectedToInternet ->
+            if (connectedToInternet) {
+                apiSetup()
+                binding.networkText.isVisible= false
+            } else {
+                binding.networkText.isVisible= true
+            }
+        }
     }
 
     private fun initViews() {
+        viewModel.networkObservation(context = requireContext())
         viewModel.facility = FacilityRealm().apply {
             facility_id = ""
             name = ""
             options = null
+        }
+
+        viewModel.option = OptionRealm().apply {
+            icon = ""
+            id = ""
+            name = ""
         }
     }
 
