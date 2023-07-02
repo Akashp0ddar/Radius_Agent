@@ -10,7 +10,7 @@ import com.example.radiusagent.R
 import com.example.radiusagent.ViewModelFactory
 import com.example.radiusagent.databinding.FragmentOptionsSelectionBinding
 import com.example.radiusagent.fragments.adapters.OptionsAdapter
-import com.example.radiusagent.models.Option
+import com.example.radiusagent.models.realmobjects.OptionRealm
 import com.example.radiusagent.repository.Repository
 
 class OptionsSelectionFragment : Fragment(R.layout.fragment_options_selection) {
@@ -28,7 +28,11 @@ class OptionsSelectionFragment : Fragment(R.layout.fragment_options_selection) {
     }
 
     private fun initSetup() {
-        viewModel.option = Option(icon = "", id = "", name = "")
+        viewModel.option = OptionRealm().apply {
+            icon = ""
+            id = ""
+            name = ""
+        }
     }
 
 
@@ -40,7 +44,7 @@ class OptionsSelectionFragment : Fragment(R.layout.fragment_options_selection) {
 
     private fun adapterSetup() {
         optionsAdapter = OptionsAdapter(
-            optionsList = viewModel.facility.options,
+            optionsList = viewModel.facility.options!!,
             context = requireContext()
         ) { option ->
             viewModel.option = option
@@ -50,9 +54,9 @@ class OptionsSelectionFragment : Fragment(R.layout.fragment_options_selection) {
 
     private fun onClick() {
         binding.btnSubmitOptions.setOnClickListener {
-            if (viewModel.option.id.isEmpty() &&
-                viewModel.option.name.isEmpty() &&
-                viewModel.option.icon.isEmpty()
+            if (viewModel.option.id.isNullOrEmpty() &&
+                viewModel.option.name.isNullOrEmpty() &&
+                viewModel.option.icon.isNullOrEmpty()
             ) {
                 Toast.makeText(requireContext(), "Please select one option", Toast.LENGTH_SHORT)
                     .show()

@@ -4,14 +4,17 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.radiusagent.FacilitiesRealm
 import com.example.radiusagent.models.Exclusion
 import com.example.radiusagent.models.Facilities
-import com.example.radiusagent.models.Facility
-import com.example.radiusagent.models.Option
+import com.example.radiusagent.models.realmobjects.ExclusionRealm
+import com.example.radiusagent.models.realmobjects.ExclusionsRealm
+import com.example.radiusagent.models.realmobjects.FacilityRealm
+import com.example.radiusagent.models.realmobjects.OptionRealm
 import com.example.radiusagent.repository.Repository
 import io.realm.Realm
 import io.realm.RealmConfiguration
+import io.realm.RealmList
+import io.realm.kotlin.where
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -27,24 +30,34 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
     }
 
     var exclusionList: List<List<Exclusion>> = listOf()
-    var facility: Facility = Facility(facility_id = "", name = "", options = listOf())
-    var option: Option = Option(icon = "", id = "", name = "")
+    var facility: FacilityRealm = FacilityRealm().apply {
+        facility_id = ""
+        name = ""
+        options = null
+    }
 
-
-    fun checkExclusion(facilityId: String, optionId: String, exclusions: List<List<Exclusion>>): Boolean {
-        for (exclusionList in exclusions) {
-            val matchingExclusion = exclusionList.find { exclusion ->
-                exclusion.facility_id == facilityId && exclusion.options_id == optionId
-            }
-            if (matchingExclusion != null) {
-                return true // Exclusion found, invalid selection
-            }
-        }
-        return false // No matching exclusion found, valid selection
+    var option: OptionRealm = OptionRealm().apply {
+        icon = ""
+        id = ""
+        name = ""
     }
 
 
-    fun realmInit(context: Context){
+
+
+
+    fun checkExclusion(exclusions: List<ExclusionRealm>, facilityId: String, optionId: String): Boolean {
+        exclusions.forEach { exclusion ->
+            if (exclusion.facility_id == facilityId && exclusion.options_id == optionId) {
+                return true
+            }
+        }
+        return false
+    }
+
+
+
+    fun realmInit(context: Context) {
         Realm.init(context)
         val config = RealmConfiguration.Builder()
             .allowQueriesOnUiThread(true)
@@ -59,17 +72,62 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
 
     }
 
-    fun addData(facilityName:String){
-        val facilities = FacilitiesRealm().apply {
-            name = facilityName
+    fun saveDataOffline(facilitiesFromApi: Facilities) {
+
+        val facilityRealmList = RealmList<FacilityRealm>()
+        val exclusionsRealm = ExclusionsRealm()
+
+
+        facilitiesFromApi.facilities.forEach { facility ->
+            val facilityRealm = FacilityRealm()
+            facilityRealm.facility_id = facility.facility_id
+            facilityRealm.name = facility.name
+            val optionRealmList = RealmList<OptionRealm>()
+            facility.options.forEach { facilityOptionsFromApi ->
+                val optionRealm = OptionRealm()
+                optionRealm.id = facilityOptionsFromApi.id
+                optionRealm.name = facilityOptionsFromApi.name
+                optionRealm.icon = facilityOptionsFromApi.icon
+                optionRealmList.add(optionRealm)
+            }
+            facilityRealm.options = optionRealmList
+
+            facilityRealmList.add(facilityRealm)
         }
 
+
+        facilitiesFromApi.exclusions.forEach { exclusionsFromApi ->
+            val exclusionRealm = RealmList<ExclusionRealm>()
+            exclusionsFromApi.forEach { exclusion ->
+                val exclusionRealmNested = ExclusionRealm().apply {
+                    facility_id = exclusion.facility_id
+                    options_id = exclusion.options_id
+                }
+                exclusionRealm.add(exclusionRealmNested)
+            }
+            exclusionsRealm.exclusionRealm.addAll(exclusionRealm)
+        }
+
+
+
+
         radiusRealm.executeTransaction {
-            it.insertOrUpdate(facilities)
+            it.insertOrUpdate(facilityRealmList)
+            it.insertOrUpdate(exclusionsRealm)
         }
     }
 
 
+
+
+
+    fun facilityRealmList(): List<FacilityRealm> {
+        return radiusRealm.where<FacilityRealm>().findAll()
+    }
+
+    fun exclusionRealmList():List<ExclusionRealm>{
+        return radiusRealm.where<ExclusionRealm>().findAll()
+    }
 
 
 }

@@ -7,14 +7,13 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.example.radiusagent.R
 import com.example.radiusagent.databinding.OptionSelectionSingleItemBinding
-import com.example.radiusagent.models.Facility
-import com.example.radiusagent.models.Option
+import com.example.radiusagent.models.realmobjects.OptionRealm
 import com.example.radiusagent.utils.Constants
 
 class OptionsAdapter(
-    private val optionsList: List<Option>,
+    private val optionsList: List<OptionRealm>,
     private val context: Context,
-    private val onItemClick: (option: Option) -> Unit
+    private val onItemClick: (option: OptionRealm) -> Unit
 ) : RecyclerView.Adapter<OptionsAdapter.ViewHolder>() {
     private var selectionItemPosition = RecyclerView.NO_POSITION
 
@@ -34,11 +33,13 @@ class OptionsAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.tvDialogOptionsIdResult.text = optionsList[position].id
         holder.binding.tvDialogFacilityNameResult.text = optionsList[position].name
-        iconSetup(icon = optionsList[position].icon, optionsViewHolder = holder)
-        if (position==selectionItemPosition){
-            holder.binding.clOptionSelections.background = AppCompatResources.getDrawable(context,R.drawable.item_select_bg)
-        }else{
-            holder.binding.clOptionSelections.background = AppCompatResources.getDrawable(context,R.drawable.bg_cl_home_screen)
+        iconSetup(icon = optionsList[position].icon!!, optionsViewHolder = holder)
+        if (position == selectionItemPosition) {
+            holder.binding.clOptionSelections.background =
+                AppCompatResources.getDrawable(context, R.drawable.item_select_bg)
+        } else {
+            holder.binding.clOptionSelections.background =
+                AppCompatResources.getDrawable(context, R.drawable.bg_cl_home_screen)
 
         }
         holder.itemView.setOnClickListener {
@@ -57,7 +58,7 @@ class OptionsAdapter(
     }
 
 
-    private fun iconSetup(icon:String,optionsViewHolder:ViewHolder){
+    private fun iconSetup(icon: String, optionsViewHolder: ViewHolder) {
         when (icon) {
             Constants.APARTMENT -> {
                 optionsViewHolder.binding.ivIcon.setImageDrawable(

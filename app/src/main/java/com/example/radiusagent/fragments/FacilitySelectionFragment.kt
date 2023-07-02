@@ -11,7 +11,7 @@ import com.example.radiusagent.R
 import com.example.radiusagent.ViewModelFactory
 import com.example.radiusagent.databinding.FacilitySelectionBinding
 import com.example.radiusagent.fragments.adapters.FacilitiesAdapter
-import com.example.radiusagent.models.Facility
+import com.example.radiusagent.models.realmobjects.FacilityRealm
 import com.example.radiusagent.repository.Repository
 
 class FacilitySelectionFragment : Fragment(R.layout.facility_selection) {
@@ -29,7 +29,11 @@ class FacilitySelectionFragment : Fragment(R.layout.facility_selection) {
     }
 
     private fun initViews() {
-        viewModel.facility = Facility(facility_id = "", name = "", options = listOf())
+        viewModel.facility = FacilityRealm().apply {
+            facility_id = ""
+            name = ""
+            options = null
+        }
     }
 
 
@@ -39,9 +43,10 @@ class FacilitySelectionFragment : Fragment(R.layout.facility_selection) {
             Log.d("API", "apiSetup:${facilities.facilities} ")
             Log.d("API", "apiSetup:${facilities.exclusions} ")
             if (facilities.facilities.isNotEmpty() && facilities.exclusions.isNotEmpty()) {
+                viewModel.saveDataOffline(facilitiesFromApi = facilities)
                 viewModel.exclusionList = facilities.exclusions
                 facilityAdapter = FacilitiesAdapter(
-                    facilitiesList = facilities.facilities, context = requireContext()
+                    facilitiesList = viewModel.facilityRealmList(), context = requireContext()
                 ) { facility ->
                     viewModel.facility = facility
                 }
@@ -54,11 +59,11 @@ class FacilitySelectionFragment : Fragment(R.layout.facility_selection) {
 
     private fun onClick() {
         binding.btnSubmitFacilities.setOnClickListener {
-            if (viewModel.facility.facility_id.isNotEmpty() && viewModel.facility.name.isNotEmpty() && viewModel.facility.options.isNotEmpty()) {
-                findNavController().navigate(FacilitySelectionFragmentDirections.actionFacilitySelectionToOptionsSelectionFragment())
-            } else {
+            if (viewModel.facility.facility_id.isNullOrEmpty() && viewModel.facility.name.isNullOrEmpty() && viewModel.facility.options.isNullOrEmpty()) {
                 Toast.makeText(requireContext(), "Please select one facility", Toast.LENGTH_SHORT)
                     .show()
+            } else {
+                findNavController().navigate(FacilitySelectionFragmentDirections.actionFacilitySelectionToOptionsSelectionFragment())
             }
         }
     }

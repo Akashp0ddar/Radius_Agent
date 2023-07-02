@@ -33,7 +33,7 @@ class ExclusionFragment : Fragment(R.layout.fragment_exclusion) {
         binding.tvDialogFacilityNameResult.text = viewModel.facility.name
         binding.tvOptionsIdResult.text = viewModel.option.id
         binding.tvOptionsNameResult.text = viewModel.option.name
-        iconSetup(viewModel.option.icon)
+        iconSetup(viewModel.option.icon!!)
 
     }
 
@@ -44,7 +44,7 @@ class ExclusionFragment : Fragment(R.layout.fragment_exclusion) {
     }
 
     private fun adapterSetUp() {
-        exclusionAdapter = ExclusionAdapter(exclusionList = viewModel.exclusionList)
+        exclusionAdapter = ExclusionAdapter(exclusionList = viewModel.exclusionRealmList())
         binding.rvExclusion.adapter = exclusionAdapter
 
     }

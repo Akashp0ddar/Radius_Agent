@@ -156,7 +156,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/exclusion_list_single_item"
+                tools:listitem="@layout/exclusion_single_item"
                 app:layout_constraintBottom_toBottomOf="@id/clExclusion"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

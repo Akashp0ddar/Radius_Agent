@@ -81,15 +81,15 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvOptions"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="0dp"
                 android:layout_marginTop="10dp"
-                tools:itemCount="5"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="@id/clOptionsSelections"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvFacilityNameResult"
+                tools:itemCount="5"
                 tools:listitem="@layout/option_selection_single_item" />
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

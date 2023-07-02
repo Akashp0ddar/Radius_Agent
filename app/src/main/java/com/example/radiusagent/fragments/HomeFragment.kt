@@ -30,9 +30,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun setUpViews() {
         if (viewModel.checkExclusion(
-                facilityId = viewModel.facility.facility_id,
-                optionId = viewModel.option.id,
-                exclusions = viewModel.exclusionList
+               exclusions = viewModel.exclusionRealmList(),
+                facilityId = viewModel.facility.facility_id!!,
+                optionId = viewModel.option.id!!
             )
         ) {
             Toast.makeText(
@@ -45,17 +45,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             binding.tvFacilityNameResult.text = viewModel.facility.name
             binding.tvOptionsIdResult.text = viewModel.option.id
             binding.tvOptionsNameResult.text = viewModel.option.name
-            if (viewModel.option.icon.isNotEmpty()) {
+            if (!viewModel.option.icon.isNullOrEmpty()) {
                 binding.ivIcon.isVisible = true
-                iconSetup(viewModel.option.icon)
+                iconSetup(viewModel.option.icon!!)
             }
         }
     }
 
     private fun onClick() {
         binding.btnSelectFacility.setOnClickListener {
-            viewModel.addData("Checking")
-//            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFacilitySelection())
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFacilitySelection())
         }
     }
 
