@@ -16,5 +16,5 @@
     <string name="update_facilities">Update Facilities</string>
     <string name="exclusion_desc">Please do not select the options or facility which are mentioned below</string>
     <string name="preview">Preview</string>
-    <string name="turn_on_internet">Your data is not update to date please turn on your internet</string>
+    <string name="turn_on_internet">Please turn on your internet</string>
 </resources>
