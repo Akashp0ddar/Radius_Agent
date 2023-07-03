@@ -11,7 +11,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.radiusagent.models.Exclusion
 import com.example.radiusagent.models.Facilities
 import com.example.radiusagent.models.realmobjects.ExclusionRealm
 import com.example.radiusagent.models.realmobjects.ExclusionsRealm
@@ -36,7 +35,6 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
         }
     }
 
-    var exclusionList: List<List<Exclusion>> = listOf()
     var facility: FacilityRealm = FacilityRealm().apply {
         facility_id = ""
         name = ""
@@ -117,6 +115,12 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
         return radiusRealm.where<ExclusionRealm>().findAll()
     }
 
+    fun clearRealm() {
+        radiusRealm.executeTransaction {
+            it.deleteAll()
+        }
+    }
+
 
     fun checkExclusion(
         exclusions: List<ExclusionRealm>,
@@ -153,15 +157,7 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
             }
 
 
-            // Network capabilities have changed for the network
-            override fun onCapabilitiesChanged(
-                network: Network,
-                networkCapabilities: NetworkCapabilities
-            ) {
-                super.onCapabilitiesChanged(network, networkCapabilities)
-                val unmetered =
-                    networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED)
-            }
+
 
             // lost network connection
             override fun onLost(network: Network) {

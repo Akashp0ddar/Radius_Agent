@@ -12,6 +12,7 @@ import com.example.radiusagent.R
 import com.example.radiusagent.ViewModelFactory
 import com.example.radiusagent.databinding.FragmentHomeBinding
 import com.example.radiusagent.repository.Repository
+import com.example.radiusagent.utils.AppUtils
 import com.example.radiusagent.utils.Constants
 
 
@@ -23,9 +24,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
-        viewModel.realmInit(context = requireContext())
+        initViews()
         setUpViews()
         onClick()
+    }
+
+    private fun initViews() {
+        viewModel.realmInit(context = requireContext())
+        AppUtils.initializePreferences(context = requireContext())
+        viewModel.networkObservation(context = requireContext())
+
     }
 
     private fun setUpViews() {
@@ -54,6 +62,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun onClick() {
         binding.btnSelectFacility.setOnClickListener {
+
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFacilitySelection())
         }
     }

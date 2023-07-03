@@ -21,7 +21,7 @@ class FacilitiesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
-            FacilitiesSingleItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            FacilitiesSingleItemBinding.inflate(LayoutInflater.from(context), parent, false)
         return ViewHolder(view)
 
     }

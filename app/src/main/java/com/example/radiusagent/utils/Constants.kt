@@ -19,5 +19,8 @@ object Constants {
     const val GARDEN = "garden"
     const val GARAGE = "garage"
 
+    const val RADIUS_AGENT_PREFERENCES = "radius_agent"
+    const val DATE_TO_COMPARE = "current_date"
+
 
 }

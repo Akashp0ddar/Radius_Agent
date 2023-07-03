@@ -19,7 +19,7 @@
             android:layout_marginVertical="20dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@id/btnSubmitFacilities"
+            app:layout_constraintBottom_toTopOf="@id/btnSubmitUpdate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -38,19 +38,21 @@
             app:layout_constraintEnd_toEndOf="@id/rvFacilities"
             app:layout_constraintStart_toStartOf="@id/rvFacilities" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/networkText"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSubmitUpdate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/turn_on_internet"
-            android:textColor="@color/black"
-            android:textSize="25sp"
-            android:gravity="center_horizontal"
-            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_cl_home_screen"
+            android:text="@string/update_facilities"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/btnSubmitFacilities"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="@id/rvFacilities"
+            app:layout_constraintStart_toStartOf="@id/rvFacilities" />
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
