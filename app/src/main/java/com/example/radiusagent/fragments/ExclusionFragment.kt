@@ -2,6 +2,7 @@ package com.example.radiusagent.fragments
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -39,7 +40,20 @@ class ExclusionFragment : Fragment(R.layout.fragment_exclusion) {
 
     private fun onClick() {
         binding.btnSubmit.setOnClickListener {
-            findNavController().navigate(ExclusionFragmentDirections.actionExclusionFragmentToHomeFragment())
+            if (viewModel.checkExclusion(
+                    exclusions = viewModel.exclusionRealmList(),
+                    facilityId = viewModel.facility.facility_id!!,
+                    optionId = viewModel.option.id!!
+                )
+            ) {
+                Toast.makeText(
+                    requireContext(),
+                    "this is a invalid selection you need to select again",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                findNavController().navigate(ExclusionFragmentDirections.actionExclusionFragmentToHomeFragment())
+            }
         }
     }
 

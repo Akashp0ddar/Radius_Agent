@@ -86,7 +86,11 @@ class FacilitySelectionFragment : Fragment(R.layout.facility_selection) {
 
     private fun showData() {
         if (viewModel.activeNetworkStatus.value == true) {
-            apiSetup()
+            if (viewModel.facilityRealmList().isEmpty()){
+                apiSetup()
+            }else{
+                showDataFromDataBase()
+            }
         } else {
             if (viewModel.facilityRealmList().isNotEmpty()){
                 showDataFromDataBase()
